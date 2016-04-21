@@ -9,7 +9,7 @@ from setuptools import setup, Extension
 
 __version__ = None
 
-with open("c-threeML/ModelInterface.h") as f:
+with open("cthreeML/ModelInterface.h") as f:
         
     for line in f:
                 
@@ -77,9 +77,9 @@ else:
 
 ext_modules_configuration = [
 
-    Extension("c-threeML.pyModelInterface",
+    Extension("cthreeML.pyModelInterface",
 
-              ["c-threeML/pyToCppModelInterface.cxx",],
+              ["cthreeML/pyToCppModelInterface.cxx",],
 
               libraries=["boost_python"],
 
@@ -88,14 +88,14 @@ ext_modules_configuration = [
               library_dirs=library_dirs,
               extra_compile_args = []) ]
 
-headers_configuration = ["c-threeML/pyToCppModelInterface.h","c-threeML/ModelInterface.h"]
+headers_configuration = ["cthreeML/pyToCppModelInterface.h","cthreeML/ModelInterface.h"]
 
 
 setup(
 
-    name="c-threeML",
+    name="cthreeML",
 
-    packages=["c-threeML"],
+    packages=["cthreeML"],
 
     version=__version__,
 
@@ -109,9 +109,9 @@ setup(
 
     author_email='giacomo.vianello@gmail.com',
 
-    url='https://github.com/giacomov/c-threeML',
+    url='https://github.com/giacomov/cthreeML',
 
-    download_url='https://github.com/giacomov/c-threeML/archive/%s' % __version__,
+    download_url='https://github.com/giacomov/cthreeML/archive/%s' % __version__,
 
     keywords=['Likelihood', 'Multi-mission', '3ML', 'HAWC', 'Fermi', 'HESS', 'joint', 'fit', 'bayesian',
               'multi-wavelength'],

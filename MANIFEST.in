@@ -1,2 +1,2 @@
-include c-threeML/ModelInterface.h
-include c-threeML/pyToCppModelInterface.h
+include cthreeML/ModelInterface.h
+include cthreeML/pyToCppModelInterface.h
