@@ -3,13 +3,13 @@
 import os
 import sys
 
-from distutils.core import setup, Extension
+from setuptools import setup, Extension
 
 # Get the version number from ModelInterface.h
 
 __version__ = None
 
-with open("c_threeML/ModelInterface.h") as f:
+with open("c-threeML/ModelInterface.h") as f:
         
     for line in f:
                 
@@ -77,9 +77,9 @@ else:
 
 ext_modules_configuration = [
 
-    Extension("c_threeML.pyModelInterface",
+    Extension("c-threeML.pyModelInterface",
 
-              ["c_threeML/pyToCppModelInterface.cxx",],
+              ["c-threeML/pyToCppModelInterface.cxx",],
 
               libraries=["boost_python"],
 
@@ -88,14 +88,14 @@ ext_modules_configuration = [
               library_dirs=library_dirs,
               extra_compile_args = []) ]
 
-headers_configuration = ["c_threeML/pyToCppModelInterface.h","c_threeML/ModelInterface.h"]
+headers_configuration = ["c-threeML/pyToCppModelInterface.h","c-threeML/ModelInterface.h"]
 
 
 setup(
 
-    name="c_threeML",
+    name="c-threeML",
 
-    packages=["c_threeML"],
+    packages=["c-threeML"],
 
     version=__version__,
 
@@ -109,9 +109,9 @@ setup(
 
     author_email='giacomo.vianello@gmail.com',
 
-    url='https://github.com/giacomov/c_threeML',
+    url='https://github.com/giacomov/c-threeML',
 
-    download_url='https://github.com/giacomov/c_threeML/archive/%s' % __version__,
+    download_url='https://github.com/giacomov/c-threeML/archive/%s' % __version__,
 
     keywords=['Likelihood', 'Multi-mission', '3ML', 'HAWC', 'Fermi', 'HESS', 'joint', 'fit', 'bayesian',
               'multi-wavelength'],
