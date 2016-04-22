@@ -40,24 +40,24 @@ namespace threeML {
         try {
         
         
-          m_nPtSources = boost::python::extract<int>(m_pyModel.attr("getNumberOfPointSources")());
+          m_nPtSources = boost::python::extract<int>(m_pyModel.attr("get_number_of_point_sources")());
         
         } catch (...) {
         
           throw std::runtime_error(
-                      "ModelInterface: Could not use getNumberOfPointSources from python Object");
+                      "ModelInterface: Could not use get_number_of_point_sources from python Object");
         
         }
         
         try {
         
         
-          m_nExtSources = boost::python::extract<int>(m_pyModel.attr("getNumberOfExtendedSources")());
+          m_nExtSources = boost::python::extract<int>(m_pyModel.attr("get_number_of_extended_sources")());
         
         } catch (...) {
         
           throw std::runtime_error(
-                      "ModelInterface: Could not use getNumberOfExtendedSources from python Object");
+                      "ModelInterface: Could not use get_number_of_extended_sources from python Object");
         
         }
         
@@ -82,12 +82,12 @@ namespace threeML {
         
         try {
         
-           coords = m_pyModel.attr("getPointSourcePosition")(srcid);
+           coords = m_pyModel.attr("get_point_source_position")(srcid);
         
         } catch (...) {
         
           throw std::runtime_error(
-                      "ModelInterface: Could not call getPointSourcePosition on the python side");
+                      "ModelInterface: Could not call get_point_source_position on the python side");
         
         }
         
@@ -154,7 +154,7 @@ namespace threeML {
 	   
      
         //expects and returns MeV-related-units
-        fluxes = m_pyModel.attr("getPointSourceFluxes")(srcid,energies);
+        fluxes = m_pyModel.attr("get_point_source_fluxes")(srcid,energies);
         
         //} catch (...) {
           
@@ -242,7 +242,7 @@ namespace threeML {
 	   
      
         //expects and returns MeV-related-units
-        fluxes = m_pyModel.attr("getExtendedSourceFluxes")(srcid, j2000_ra, j2000_dec, energies);
+        fluxes = m_pyModel.attr("get_extended_source_fluxes")(srcid, j2000_ra, j2000_dec, energies);
         
         //} catch (...) {
           
@@ -291,7 +291,7 @@ namespace threeML {
         try {
         
            name = boost::python::extract<std::string>(
-                                  m_pyModel.attr("getPointSourceName")(srcid)
+                                  m_pyModel.attr("get_point_source_name")(srcid)
                                   );
         } catch (...) {
         
@@ -311,7 +311,7 @@ namespace threeML {
         try {
         
            name = boost::python::extract<std::string>(
-                                  m_pyModel.attr("getExtendedSourceName")(srcid)
+                                  m_pyModel.attr("get_extended_source_name")(srcid)
                                   );
         } catch (...) {
         
@@ -331,7 +331,7 @@ namespace threeML {
     
       boost::python::object boundaries;
       
-      boundaries = m_pyModel.attr("getExtendedSourceBoundaries")( srcid );
+      boundaries = m_pyModel.attr("get_extended_source_boundaries")( srcid );
       
       std::vector<double> boundaries_v = to_std_vector<double>(boundaries);
       
