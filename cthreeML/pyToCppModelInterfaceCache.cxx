@@ -102,7 +102,7 @@ void pyToCppModelInterfaceCache::getPointSourcePosition(int srcid, double *j2000
   throw std::runtime_error("ModelInterfaceCache: point source not yet implemented");
 }
 
-void pyToCppModelInterfaceCache::update() {
+void pyToCppModelInterfaceCache::reset() {
 
   //Empty the cache
   m_extSources.clear();
@@ -261,5 +261,6 @@ BOOST_PYTHON_MODULE (pyModelInterfaceCache) {
       .def("getExtendedSourceBoundaries", &pyToCppModelInterfaceCache::getExtendedSourceBoundaries)
       .def("setExtSourceBoundaries", &pyToCppModelInterfaceCache::setExtSourceBoundaries)
       .def("setExtSourceCube",&pyToCppModelInterfaceCache::setExtSourceCube)
-      .def("getExtendedSourceFluxes_test",&pyToCppModelInterfaceCache::getExtendedSourceFluxes_test);
+      .def("getExtendedSourceFluxes_test",&pyToCppModelInterfaceCache::getExtendedSourceFluxes_test)
+      .def("reset",&pyToCppModelInterfaceCache::reset);
 }
