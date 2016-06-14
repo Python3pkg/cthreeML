@@ -121,7 +121,9 @@ pyToCppModelInterfaceCache::getPointSourceFluxes(int srcid, std::vector<double> 
 
 int pyToCppModelInterfaceCache::getNumberOfExtendedSources() const {
 
-  return m_extSources.size();
+  // We use the size of bounding boxes and not of m_extSources because the latter
+  // could get filled in a second moment
+  return m_boundingBoxes.size();
 
 }
 
