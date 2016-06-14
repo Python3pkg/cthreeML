@@ -239,6 +239,8 @@ BOOST_PYTHON_MODULE (pyModelInterfaceCache) {
       .def("isInsideAnyExtendedSource", pure_virtual(&ModelInterface::isInsideAnyExtendedSource))
       .def("getExtendedSourceBoundaries", pure_virtual(&ModelInterface::getExtendedSourceBoundaries));
 
+  numeric::array::set_module_and_type("numpy", "ndarray");
+
   class_<pyToCppModelInterfaceCache, bases<ModelInterface> >("pyToCppModelInterfaceCache", init< >())
       .def("getNumberOfPointSources", &pyToCppModelInterfaceCache::getNumberOfPointSources)
       .def("getPointSourcePosition", &pyToCppModelInterfaceCache::getPointSourcePosition)
