@@ -72,6 +72,8 @@ class pyToCppModelInterfaceCache: public ModelInterface {
   std::vector<double> getExtendedSourceFluxes(int srcid, double j2000_ra, double j2000_dec,
                                               std::vector<double> energies) const;
 
+  std::vector<double> getExtendedSourceFluxes_test(int srcid, double j2000_ra, double j2000_dec) const;
+
   std::string getExtendedSourceName(int srcid) const;
 
   bool isInsideAnyExtendedSource(double j2000_ra, double j2000_dec) const;

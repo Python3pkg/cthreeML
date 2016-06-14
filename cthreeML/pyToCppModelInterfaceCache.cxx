@@ -135,6 +135,14 @@ pyToCppModelInterfaceCache::getExtendedSourceFluxes(int srcid, double j2000_ra, 
 
 }
 
+std::vector<double>
+pyToCppModelInterfaceCache::getExtendedSourceFluxes_test(int srcid, double j2000_ra, double j2000_dec) const {
+
+  SkyCoord sky_pos(j2000_ra, j2000_dec);
+
+  return m_extSources.at(srcid).at(sky_pos);
+
+}
 
 std::string pyToCppModelInterfaceCache::getPointSourceName(int srcid) const {
 
@@ -226,7 +234,7 @@ struct VecToList {
 
 BOOST_PYTHON_MODULE (pyModelInterfaceCache) {
   //hello
-  to_python_converter<std::vector<double, std::allocator<double> >, VecToList<double> >();
+  //to_python_converter<std::vector<double, std::allocator<double> >, VecToList<double> >();
 
   class_<ModelInterfaceCacheWrap, boost::noncopyable>("ModelInterface")
       .def("getNumberOfPointSources", pure_virtual(&ModelInterface::getNumberOfPointSources))
@@ -252,5 +260,6 @@ BOOST_PYTHON_MODULE (pyModelInterfaceCache) {
       .def("isInsideAnyExtendedSource", &pyToCppModelInterfaceCache::isInsideAnyExtendedSource)
       .def("getExtendedSourceBoundaries", &pyToCppModelInterfaceCache::getExtendedSourceBoundaries)
       .def("setExtSourceBoundaries", &pyToCppModelInterfaceCache::setExtSourceBoundaries)
-      .def("setExtSourceCube",&pyToCppModelInterfaceCache::setExtSourceCube);
+      .def("setExtSourceCube",&pyToCppModelInterfaceCache::setExtSourceCube)
+      .def("getExtendedSourceFluxes_test",&pyToCppModelInterfaceCache::getExtendedSourceFluxes_test);
 }
