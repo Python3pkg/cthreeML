@@ -2,6 +2,7 @@
 
 import os
 import sys
+import numpy as np
 
 from setuptools import setup, Extension
 
@@ -73,6 +74,9 @@ else:
 
         final_messages.append("Using boost.python from the system path.")
 
+# Now add the numpy headers
+include_dirs.append(np.get_include())
+
 # Configure the variables to build the external module with the C/C++ wrapper
 
 ext_modules_configuration = [
@@ -86,9 +90,22 @@ ext_modules_configuration = [
               include_dirs=include_dirs,
 
               library_dirs=library_dirs,
-              extra_compile_args = []) ]
+              extra_compile_args = []),
 
-headers_configuration = ["cthreeML/pyToCppModelInterface.h","cthreeML/ModelInterface.h"]
+    Extension("cthreeML.pyModelInterfaceCache",
+
+              ["cthreeML/pyToCppModelInterfaceCache.cxx",],
+
+              libraries=["boost_python"],
+
+              include_dirs=include_dirs,
+
+              library_dirs=library_dirs,
+              extra_compile_args = [])]
+
+headers_configuration = ["cthreeML/pyToCppModelInterface.h",
+                         "cthreeML/ModelInterface.h",
+                         "cthreeML/pyToCppModelInterfaceCache.h"]
 
 
 setup(
