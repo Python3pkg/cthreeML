@@ -234,7 +234,7 @@ struct VecToList {
 
 BOOST_PYTHON_MODULE (pyModelInterfaceCache) {
   //hello
-  //to_python_converter<std::vector<double, std::allocator<double> >, VecToList<double> >();
+  to_python_converter<std::vector<double, std::allocator<double> >, VecToList<double> >();
 
   class_<ModelInterfaceCacheWrap, boost::noncopyable>("ModelInterface")
       .def("getNumberOfPointSources", pure_virtual(&ModelInterface::getNumberOfPointSources))
