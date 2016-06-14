@@ -135,8 +135,17 @@ pyToCppModelInterfaceCache::getExtendedSourceFluxes(int srcid, double j2000_ra, 
 
   SkyCoord sky_pos(j2000_ra, j2000_dec);
 
-  return m_extSources.at(srcid).at(sky_pos);
+  try {
 
+    return m_extSources.at(srcid).at(sky_pos);
+
+  } catch (...) {
+
+    std::cerr << "Cache failure" << std::endl;
+
+    std::cerr << "Requested id " << srcid << " at position " << j2000_ra << ", " << j2000_dec << std::endl;
+
+  }
 }
 
 std::vector<double>
