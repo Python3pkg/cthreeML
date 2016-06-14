@@ -102,13 +102,15 @@ void pyToCppModelInterfaceCache::getPointSourcePosition(int srcid, double *j2000
   throw std::runtime_error("ModelInterfaceCache: point source not yet implemented");
 }
 
+
 void pyToCppModelInterfaceCache::reset() {
 
   //Empty the cache
+  /*
   m_extSources.clear();
   m_boundingBoxes.clear();
   m_nExtSources = 0;
-  m_nPtSources = 0;
+  m_nPtSources = 0;*/
 
 }
 
