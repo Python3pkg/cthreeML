@@ -83,7 +83,7 @@ class pyToCppModelInterfaceCache: public ModelInterface {
                                    double *j2000_dec_min,
                                    double *j2000_dec_max) const;
 
-  void update();
+  void reset();
 
  private:
 
