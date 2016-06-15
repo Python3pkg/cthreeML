@@ -121,7 +121,19 @@ int pyToCppModelInterfaceCache::getNumberOfPointSources() const {
 
 void pyToCppModelInterfaceCache::getPointSourcePosition(int srcid, double *j2000_ra, double *j2000_dec) const {
 
-  SkyCoord this_position = m_ptsSourcesPos.at(srcid);
+  try {
+
+    SkyCoord this_position = m_ptsSourcesPos.at(srcid);
+
+  } catch (...) {
+
+    std::stringstream name;
+
+    name << "Point source " << srcid << " not found in position cache";
+
+    throw name.str();
+
+  }
 
   *j2000_ra = this_position.first;
   *j2000_dec = this_position.second;
