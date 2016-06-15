@@ -133,7 +133,7 @@ void pyToCppModelInterfaceCache::getPointSourcePosition(int srcid, double *j2000
 
     name << "Point source " << srcid << " not found in position cache";
 
-    throw name.str();
+    throw std::runtime_error(name.str());
 
   }
 
@@ -163,7 +163,7 @@ pyToCppModelInterfaceCache::getPointSourceFluxes(int srcid, std::vector<double> 
 
     name << "Point source " << srcid << " not found in spectrum cache";
 
-    throw name.str();
+    throw std::runtime_error(name.str());
 
   }
 
