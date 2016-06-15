@@ -156,6 +156,17 @@ void pyToCppModelInterfaceCache::reset() {
 std::vector<double>
 pyToCppModelInterfaceCache::getPointSourceFluxes(int srcid, std::vector<double> energies) const {
 
+  if (m_ptsSources.count(srcid) == 0)
+  {
+
+    std::stringstream name;
+
+    name << "Point source " << srcid << " not found in spectrum cache";
+
+    throw name.str();
+
+  }
+
   return m_ptsSources.at(srcid);
 
 }
