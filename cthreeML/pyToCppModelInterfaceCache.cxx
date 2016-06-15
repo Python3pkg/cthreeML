@@ -26,7 +26,7 @@ void pyToCppModelInterfaceCache::setPtsSourceSpectrum(const int id, const numeri
 
   // These are both n_points in size
 
-  PyArrayObject* spectrum__ = (PyArrayObject*) cube.ptr();
+  PyArrayObject* spectrum__ = (PyArrayObject*) spectrum.ptr();
 
   unsigned int n_energies = (unsigned int) *(spectrum__->dimensions);
 
