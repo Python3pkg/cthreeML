@@ -21,6 +21,28 @@ std::vector<T> to_std_vector(const boost::python::object &iterable) {
                         boost::python::stl_input_iterator<T>());
 }
 
+void pyToCppModelInterfaceCache::setPtsSourceSpectrum(const int id, const numeric::array& spectrum)
+{
+
+  // These are both n_points in size
+
+  PyArrayObject* spectrum__ = (PyArrayObject*) cube.ptr();
+
+  unsigned int n_energies = (unsigned int) *(spectrum__->dimensions);
+
+  double* spectrum_ = (double *) spectrum__->data;
+
+  m_ptsSources[id].assign(spectrum_, spectrum_ + n_energies);
+
+}
+
+void pyToCppModelInterfaceCache::setPtsSourcePosition(const int id, const float lon, const float lat)
+{
+
+  m_ptsSourcesPos[id] = SkyCoord(lon, lat);
+
+}
+
 void pyToCppModelInterfaceCache::setExtSourceBoundaries(const int id, const float lon_min, const float lon_max,
                                                         const float lat_min, const float lat_max)
 {
@@ -93,13 +115,17 @@ bool pyToCppModelInterfaceCache::isInsideAnyExtendedSource(double j2000_ra, doub
 
 int pyToCppModelInterfaceCache::getNumberOfPointSources() const {
 
-  return m_nPtSources;
+  return m_ptsSourcesPos.size();
 
 }
 
 void pyToCppModelInterfaceCache::getPointSourcePosition(int srcid, double *j2000_ra, double *j2000_dec) const {
 
-  throw std::runtime_error("ModelInterfaceCache: point source not yet implemented");
+  SkyCoord this_position = m_ptsSourcesPos.at(srcid);
+
+  *j2000_ra = this_position.first;
+  *j2000_dec = this_position.second;
+
 }
 
 
@@ -108,6 +134,7 @@ void pyToCppModelInterfaceCache::reset() {
   //Empty the cache
 
   m_extSources.clear();
+  m_ptsSources.clear();
   /*
   m_boundingBoxes.clear();
   m_nExtSources = 0;

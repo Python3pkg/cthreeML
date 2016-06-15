@@ -32,14 +32,14 @@ typedef struct BoundingBox
   float lat_max;
 } BoundingBox;
 
-typedef std::vector<double> spectrum;
+typedef std::vector<double> Spectrum;
 
 // Using ptr_map from boost to avoid the copying that the standard
 // map would make every time we insert an element. These are also
 // auto pointers, so the moment the map is emptied, the memory
 // will be freed
 
-typedef boost::ptr_map<SkyCoord, spectrum> ExtSrcCube;
+typedef boost::ptr_map<SkyCoord, Spectrum> ExtSrcCube;
 
 
 class pyToCppModelInterfaceCache: public ModelInterface {
@@ -53,6 +53,10 @@ class pyToCppModelInterfaceCache: public ModelInterface {
 
   void setExtSourceCube(const int id, const numeric::array& cube,
                         const numeric::array& lon, const numeric::array& lat);
+
+  void setPtsSourceSpectrum(const int id, const numeric::array& spectrum);
+
+  void setPtsSourcePosition(const int id, const float lon, const float lat);
 
   //Point source interface
 
@@ -92,6 +96,10 @@ class pyToCppModelInterfaceCache: public ModelInterface {
   std::map<int, ExtSrcCube> m_extSources;
 
   std::map<int, BoundingBox> m_boundingBoxes;
+
+  boost::ptr_map<int, Spectrum> m_ptsSources;
+
+  std::map<int, SkyCoord> m_ptsSourcesPos;
 
 };
 
