@@ -145,7 +145,7 @@ void pyToCppModelInterfaceCache::reset() {
 std::vector<double>
 pyToCppModelInterfaceCache::getPointSourceFluxes(int srcid, std::vector<double> energies) const {
 
-  throw std::runtime_error("ModelInterfaceCache: point source not yet implemented");
+  return m_ptsSources.at(srcid);
 
 }
 
