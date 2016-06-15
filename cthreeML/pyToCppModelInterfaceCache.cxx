@@ -156,18 +156,32 @@ void pyToCppModelInterfaceCache::reset() {
 std::vector<double>
 pyToCppModelInterfaceCache::getPointSourceFluxes(int srcid, std::vector<double> energies) const {
 
+
   if (m_ptsSources.count(srcid) == 0)
   {
+    // This happens during the construction of LikeHAWC because there is a energy reweighting
+    // At that moment the cache is still empty, so let's just return the energy array which
+    // has the right size.
 
+    /*
     std::stringstream name;
 
     name << "Point source " << srcid << " not found in spectrum cache";
 
-    throw std::runtime_error(name.str());
+
+    throw std::runtime_error(name.str());*/
+
+    std::cerr << "Point source " << srcid << " not found in spectrum cache" << std::endl;
+
+    return energies;
+
+  } else {
+
+    return m_ptsSources.at(srcid);
 
   }
 
-  return m_ptsSources.at(srcid);
+
 
 }
 
