@@ -294,5 +294,7 @@ BOOST_PYTHON_MODULE (pyModelInterfaceCache) {
       .def("setExtSourceBoundaries", &pyToCppModelInterfaceCache::setExtSourceBoundaries)
       .def("setExtSourceCube",&pyToCppModelInterfaceCache::setExtSourceCube)
       .def("getExtendedSourceFluxes_test",&pyToCppModelInterfaceCache::getExtendedSourceFluxes_test)
-      .def("reset",&pyToCppModelInterfaceCache::reset);
+      .def("reset",&pyToCppModelInterfaceCache::reset)
+      .def("setPtsSourceSpectrum",&pyToCppModelInterfaceCache::setPtsSourceSpectrum)
+      ..def("setPtsSourcePosition",&pyToCppModelInterfaceCache::setPtsSourcePosition);
 }
