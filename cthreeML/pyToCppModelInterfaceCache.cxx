@@ -124,6 +124,8 @@ void pyToCppModelInterfaceCache::getPointSourcePosition(int srcid, double *j2000
   try {
 
     SkyCoord this_position = m_ptsSourcesPos.at(srcid);
+    *j2000_ra = this_position.first;
+    *j2000_dec = this_position.second;
 
   } catch (...) {
 
@@ -134,9 +136,6 @@ void pyToCppModelInterfaceCache::getPointSourcePosition(int srcid, double *j2000
     throw name.str();
 
   }
-
-  *j2000_ra = this_position.first;
-  *j2000_dec = this_position.second;
 
 }
 
