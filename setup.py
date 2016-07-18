@@ -16,7 +16,7 @@ with open("cthreeML/ModelInterface.h") as f:
                 
         if line.find("#define INTERFACE_VERSION")==0:
             
-            __version__ = "%i.0.1" % int(line.split(" ")[2])
+            __version__ = "%i.0.2" % int(line.split(" ")[2])
             
             print __version__
             
@@ -81,17 +81,6 @@ include_dirs.append(np.get_include())
 
 ext_modules_configuration = [
 
-    Extension("cthreeML.pyModelInterface",
-
-              ["cthreeML/pyToCppModelInterface.cxx",],
-
-              libraries=["boost_python"],
-
-              include_dirs=include_dirs,
-
-              library_dirs=library_dirs,
-              extra_compile_args = []),
-
     Extension("cthreeML.pyModelInterfaceCache",
 
               ["cthreeML/pyToCppModelInterfaceCache.cxx",],
@@ -103,8 +92,7 @@ ext_modules_configuration = [
               library_dirs=library_dirs,
               extra_compile_args = [])]
 
-headers_configuration = ["cthreeML/pyToCppModelInterface.h",
-                         "cthreeML/ModelInterface.h",
+headers_configuration = ["cthreeML/ModelInterface.h",
                          "cthreeML/pyToCppModelInterfaceCache.h"]
 
 
