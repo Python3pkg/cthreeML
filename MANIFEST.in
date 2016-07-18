@@ -1,2 +1,3 @@
 include cthreeML/ModelInterface.h
 include cthreeML/pyToCppModelInterface.h
+include cthreeML/pyToCppModelInterfaceCache.h
