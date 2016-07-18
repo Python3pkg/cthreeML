@@ -3,13 +3,6 @@
 //Interface class for the likelihood model
 //Derived class must implement all these methods
 
-// *************  DO NOT CHANGE ANY DETAIL HERE FOR ANY REASON *********************
-
-// Changing something here will get this header out of sync with the copy contained
-// in 3ML and give you weird crashes when using LiFF from 3ML.
-
-// *********************************************************************************
-
 // This is an integer
 
 #define INTERFACE_VERSION 1
