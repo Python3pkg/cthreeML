@@ -21,7 +21,7 @@ std::vector<T> to_std_vector(const boost::python::object &iterable) {
                         boost::python::stl_input_iterator<T>());
 }
 
-void pyToCppModelInterfaceCache::setPtsSourceSpectrum(const int id, const boost::python::numpy::array& spectrum)
+void pyToCppModelInterfaceCache::setPtsSourceSpectrum(const int id, const boost::python::numpy::ndarray& spectrum)
 {
 
   // These are both n_points in size
@@ -59,9 +59,9 @@ void pyToCppModelInterfaceCache::setExtSourceBoundaries(const int id, const floa
 }
 
 void pyToCppModelInterfaceCache::setExtSourceCube(const int id, 
-                                                  const boost::python::numpy::array &cube,
-                                                  const boost::python::numpy::array &lon, 
-                                                  const boost::python::numpy::array &lat)
+                                                  const boost::python::numpy::ndarray &cube,
+                                                  const boost::python::numpy::ndarray &lon, 
+                                                  const boost::python::numpy::ndarray &lat)
 {
 
   // Add an extended source to the cache (a map)
@@ -317,7 +317,7 @@ BOOST_PYTHON_MODULE (pyModelInterfaceCache) {
       .def("isInsideAnyExtendedSource", pure_virtual(&ModelInterface::isInsideAnyExtendedSource))
       .def("getExtendedSourceBoundaries", pure_virtual(&ModelInterface::getExtendedSourceBoundaries));
 
-  boost::python::numpy::array::set_module_and_type("numpy", "ndarray");
+  boost::python::numpy::ndarray::set_module_and_type("numpy", "ndarray");
 
   class_<pyToCppModelInterfaceCache, bases<ModelInterface> >("pyToCppModelInterfaceCache", init< >())
       .def("getNumberOfPointSources", &pyToCppModelInterfaceCache::getNumberOfPointSources)
