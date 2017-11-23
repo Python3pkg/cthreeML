@@ -402,7 +402,8 @@ BOOST_PYTHON_MODULE(pyModelInterface)
 {
   //hello
   to_python_converter<std::vector<double,std::allocator<double> >, VecToList<double> >();
-  
+  to_python_converter<std::vector<int,std::allocator<int> >, VecToList<int> >();
+	
   class_<ModelInterfaceWrap, boost::noncopyable>("ModelInterface")
     .def("getNumberOfPointSources", pure_virtual(&ModelInterface::getNumberOfPointSources))
     .def("getPointSourcePosition", pure_virtual(&ModelInterface::getPointSourcePosition))
