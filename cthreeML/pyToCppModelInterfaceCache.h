@@ -17,6 +17,7 @@
 #include <map>
 #include <string>
 #include <boost/ptr_container/ptr_map.hpp>
+#include <boost/python/numeric.hpp>
 
 using namespace boost::python;
 
