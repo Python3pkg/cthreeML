@@ -53,11 +53,11 @@ class pyToCppModelInterfaceCache: public ModelInterface {
                               const float lat_min, const float lat_max);
 
   void setExtSourceCube(const int id, 
-                        const boost::python::numpy::array& cube,
-                        const boost::python::numpy::array& lon, 
-                        const boost::python::numpy::array& lat);
+                        const boost::python::numpy::ndarray& cube,
+                        const boost::python::numpy::ndarray& lon, 
+                        const boost::python::numpy::ndarray& lat);
 
-  void setPtsSourceSpectrum(const int id, const boost::python::numpy::array& spectrum);
+  void setPtsSourceSpectrum(const int id, const boost::python::numpy::ndarray& spectrum);
 
   void setPtsSourcePosition(const int id, const float lon, const float lat);
 
