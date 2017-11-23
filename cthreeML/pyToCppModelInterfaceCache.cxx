@@ -5,12 +5,15 @@
 #include <boost/python/stl_iterator.hpp>
 #include <iostream>
 #include <stdexcept>
-#include <boost/python/numpy.hpp>
+#include "boost_numpy.h"
 #include <boost/python/tuple.hpp>
 #include <boost/python/module.hpp>
 #include <boost/python/def.hpp>
 #include <numpy/noprefix.h>
 
+#if BOOST_VERSION < 106500
+#include <boost/python/numeric.hpp>
+#endif
 
 namespace threeML {
 
@@ -21,16 +24,16 @@ std::vector<T> to_std_vector(const boost::python::object &iterable) {
                         boost::python::stl_input_iterator<T>());
 }
 
-void pyToCppModelInterfaceCache::setPtsSourceSpectrum(const int id, const boost::python::numpy::ndarray& spectrum)
+void pyToCppModelInterfaceCache::setPtsSourceSpectrum(const int id, const NumpyArrayType& spectrum)
 {
 
   // These are both n_points in size
 
   PyArrayObject* spectrum__ = (PyArrayObject*) spectrum.ptr();
 
-  unsigned int n_energies = (unsigned int) *(spectrum__->dimensions);
+  unsigned int n_energies = (unsigned int) *(PyArray_SHAPE(spectrum__));
 
-  double* spectrum_ = (double *) spectrum__->data;
+  double* spectrum_ = (double *) PyArray_DATA(spectrum__);
 
   m_ptsSources[id].assign(spectrum_, spectrum_ + n_energies);
 
@@ -59,26 +62,26 @@ void pyToCppModelInterfaceCache::setExtSourceBoundaries(const int id, const floa
 }
 
 void pyToCppModelInterfaceCache::setExtSourceCube(const int id, 
-                                                  const boost::python::numpy::ndarray &cube,
-                                                  const boost::python::numpy::ndarray &lon, 
-                                                  const boost::python::numpy::ndarray &lat)
+                                                  const NumpyArrayType &cube,
+                                                  const NumpyArrayType &lon,
+                                                  const NumpyArrayType &lat)
 {
 
   // Add an extended source to the cache (a map)
 
   PyArrayObject* cube__ = (PyArrayObject*) cube.ptr();
 
-  unsigned int n_points = (unsigned int) *(cube__->dimensions);
-  unsigned int n_energies = (unsigned int) *(cube__->dimensions+1);
+  unsigned int n_points = (unsigned int) *(PyArray_SHAPE(cube__));
+  unsigned int n_energies = (unsigned int) *(PyArray_SHAPE(cube__)+1);
 
   // This is n_points * n_energies in size
 
-  double* cube_ = (double *) cube__->data;
+  double* cube_ = (double *) PyArray_DATA(cube__);
 
   // These are both n_points in size
 
-  double* lon_ = (double *) ((PyArrayObject*) lon.ptr())->data;
-  double* lat_ = (double *) ((PyArrayObject*) lat.ptr())->data;
+  double* lon_ = (double *) PyArray_DATA((PyArrayObject*) lon.ptr());
+  double* lat_ = (double *) PyArray_DATA((PyArrayObject*) lat.ptr());
 
   ExtSrcCube this_srcCube;
 
@@ -317,7 +320,11 @@ BOOST_PYTHON_MODULE (pyModelInterfaceCache) {
       .def("isInsideAnyExtendedSource", pure_virtual(&ModelInterface::isInsideAnyExtendedSource))
       .def("getExtendedSourceBoundaries", pure_virtual(&ModelInterface::getExtendedSourceBoundaries));
 
-  boost::python::numpy::ndarray::set_module_and_type("numpy", "ndarray");
+  //This is needed only for the old API (the numeric.hpp API, not the numpy.hpp API)
+#if BOOST_VERSION < 106500
+
+  boost::python::numeric::array::set_module_and_type("numpy", "ndarray");
+#endif
 
   class_<pyToCppModelInterfaceCache, bases<ModelInterface> >("pyToCppModelInterfaceCache", init< >())
       .def("getNumberOfPointSources", &pyToCppModelInterfaceCache::getNumberOfPointSources)
