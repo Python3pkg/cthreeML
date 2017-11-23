@@ -17,7 +17,7 @@
 #include <map>
 #include <string>
 #include <boost/ptr_container/ptr_map.hpp>
-#include <boost/python/numeric.hpp>
+#include <boost/python/numpy.hpp>
 
 using namespace boost::python;
 
@@ -53,11 +53,11 @@ class pyToCppModelInterfaceCache: public ModelInterface {
                               const float lat_min, const float lat_max);
 
   void setExtSourceCube(const int id, 
-                        const boost::python::numeric::array& cube,
-                        const boost::python::numeric::array& lon, 
-                        const boost::python::numeric::array& lat);
+                        const boost::python::numpy::array& cube,
+                        const boost::python::numpy::array& lon, 
+                        const boost::python::numpy::array& lat);
 
-  void setPtsSourceSpectrum(const int id, const boost::python::numeric::array& spectrum);
+  void setPtsSourceSpectrum(const int id, const boost::python::numpy::array& spectrum);
 
   void setPtsSourcePosition(const int id, const float lon, const float lat);
 
