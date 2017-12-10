@@ -18,7 +18,7 @@ with open("cthreeML/ModelInterface.h") as f:
             
             __version__ = "%i.0.3" % int(line.split(" ")[2])
             
-            print __version__
+            print(__version__)
             
             break
 
@@ -41,12 +41,12 @@ if boost_root:
     # Check that the directory provided actually exists
 
     if not os.path.exists(boost_root):
-        print("\nERROR: the directory %s specified in BOOSTROOT does not exist!" % boost_root)
+        print(("\nERROR: the directory %s specified in BOOSTROOT does not exist!" % boost_root))
         sys.exit(-1)
 
     # The user want to override pre-defined location of boost
 
-    print("\n\n **** Using boost.python from the env. variable $BOOSTROOT (%s)" % boost_root)
+    print(("\n\n **** Using boost.python from the env. variable $BOOSTROOT (%s)" % boost_root))
 
     include_dirs = [os.path.join(boost_root, 'include')]
     library_dirs = [os.path.join(boost_root, 'lib')]
@@ -54,12 +54,12 @@ if boost_root:
     # Check that the include and library directories exist
 
     if not os.path.exists(include_dirs[0]):
-        print("\nERROR: the include directory %s for boost.python does not exist!" % include_dirs[0])
+        print(("\nERROR: the include directory %s for boost.python does not exist!" % include_dirs[0]))
 
         sys.exit(-1)
 
     if not os.path.exists(library_dirs[0]):
-        print("\nERROR: the library directory %s for boost.python does not exist!" % library_dirs[0])
+        print(("\nERROR: the library directory %s for boost.python does not exist!" % library_dirs[0]))
 
         sys.exit(-1)
 
@@ -136,4 +136,4 @@ if len(final_messages) > 0:
     print("FINAL NOTES:")
     print("#############")
 
-    print("\n".join(final_messages))
+    print(("\n".join(final_messages)))
